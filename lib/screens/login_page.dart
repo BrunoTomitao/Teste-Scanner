@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('UniALFA', style: theme.textTheme.headlineMedium?.copyWith(color: Colors.green)),
+                Text('UniALFA', style: theme.textTheme.headlineMedium?.copyWith(color: Colors.blue)),
                 const SizedBox(height: 16),
                 Text('Login', style: theme.textTheme.titleLarge),
                 const SizedBox(height: 40),

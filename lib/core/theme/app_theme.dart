@@ -4,12 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static final light = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.green,
+    primarySwatch: Colors.blue,
     scaffoldBackgroundColor: Colors.white,
     textTheme: GoogleFonts.poppinsTextTheme(),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
@@ -23,7 +23,7 @@ class AppTheme {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.green.shade700, width: 2),
+        borderSide: BorderSide(color: Colors.blue.shade700, width: 2),
       ),
     ),
   );
