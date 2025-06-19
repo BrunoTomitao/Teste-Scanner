@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,21 +9,18 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _userController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
   bool _loading = false;
 
-  void _submit() {
-    if (_formKey.currentState?.validate() ?? false) {
-      setState(() => _loading = true);
+  void _login() async {
+    if (!_formKey.currentState!.validate()) return;
 
-      // Simula delay da API
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() => _loading = false);
-        // Aqui, salvar local e navegar
-        Navigator.of(context).pushReplacementNamed('/home');
-      });
-    }
+    setState(() => _loading = true);
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() => _loading = false);
+
+    Navigator.pushReplacementNamed(context, '/camera');
   }
 
   @override
@@ -33,31 +29,64 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 50),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('UniALFA', style: theme.textTheme.headlineMedium?.copyWith(color: Colors.blue)),
-                const SizedBox(height: 16),
-                Text('Login', style: theme.textTheme.titleLarge),
-                const SizedBox(height: 40),
-                TextFormField(
-                  controller: _userController,
-                  decoration: const InputDecoration(labelText: 'Usuário'),
-                  validator: (v) => (v == null || v.isEmpty) ? 'Informe o usuário' : null,
+          padding: const EdgeInsets.symmetric(horizontal: 36),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'UniALFA Gabarito',
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    TextFormField(
+                      controller: _userController,
+                      decoration: const InputDecoration(
+                        labelText: 'Usuário',
+                        prefixIcon: Icon(Icons.person, color: Colors.lightBlueAccent),
+                      ),
+                      validator: (v) =>
+                      (v == null || v.isEmpty) ? 'Informe o usuário' : null,
+                    ),
+                    const SizedBox(height: 24),
+                    TextFormField(
+                      controller: _passController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Senha',
+                        prefixIcon: Icon(Icons.lock, color: Colors.lightBlueAccent),
+                      ),
+                      validator: (v) =>
+                      (v == null || v.isEmpty) ? 'Informe a senha' : null,
+                    ),
+                    const SizedBox(height: 48),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _loading ? null : _login,
+                        child: _loading
+                            ? const SizedBox(
+                          height: 26,
+                          width: 26,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 3,
+                          ),
+                        )
+                            : const Text('Entrar'),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Senha'),
-                  validator: (v) => (v == null || v.isEmpty) ? 'Informe a senha' : null,
-                ),
-                const SizedBox(height: 30),
-                CustomButton(label: 'Entrar', onPressed: _submit, isLoading: _loading),
-              ],
+              ),
             ),
           ),
         ),

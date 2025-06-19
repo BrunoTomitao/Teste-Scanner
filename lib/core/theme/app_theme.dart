@@ -1,29 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static final light = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.blue,
+    primaryColor: Colors.blue,
     scaffoldBackgroundColor: Colors.white,
-    textTheme: GoogleFonts.poppinsTextTheme(),
+    colorScheme: ColorScheme.light(
+      primary: Colors.blue,
+      secondary: Colors.blueAccent,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.grey.shade200,
+      labelStyle: TextStyle(color: Colors.grey.shade800),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey.shade400),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
-        textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(vertical: 14),
       ),
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+  );
+
+  static final dark = ThemeData.dark().copyWith(
+    primaryColor: Colors.blue.shade400,
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    colorScheme: ColorScheme.dark(
+      primary: Colors.blue.shade400,
+      secondary: Colors.blueAccent,
+      background: const Color(0xFF121212),
+      surface: const Color(0xFF1E1E1E),
+      onPrimary: Colors.white,
+      onSurface: Colors.white70,
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
       filled: true,
-      fillColor: Colors.grey.shade100,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      fillColor: Color(0xFF1E1E1E),
+      labelStyle: TextStyle(color: Colors.white70),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white30),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.blue.shade700, width: 2),
+        borderSide: BorderSide(color: Colors.blueAccent),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(vertical: 14),
       ),
     ),
   );
